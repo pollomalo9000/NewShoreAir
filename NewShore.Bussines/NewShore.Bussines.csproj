@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NewShore.DataAccess\NewShore.DataAccess.csproj" />
+    <ProjectReference Include="..\NewShoreAir.Dtos\NewShoreAir.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

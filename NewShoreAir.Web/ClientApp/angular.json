@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "NewShoreAir.Web"
+  "defaultProject": "NewShoreAir.Web",
+  "cli": {
+    "analytics": "73371f40-14c4-4d71-a9a1-6dc77caa54d2"
+  }
 }

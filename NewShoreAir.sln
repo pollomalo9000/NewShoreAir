@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewShoreAir.Web", "NewShoreAir.Web\NewShoreAir.Web.csproj", "{D2EAAC11-0DC9-46D4-8C77-3B667F5A5454}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewShoreAir.Web", "NewShoreAir.Web\NewShoreAir.Web.csproj", "{D2EAAC11-0DC9-46D4-8C77-3B667F5A5454}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewShore.Bussines", "NewShore.Bussines\NewShore.Bussines.csproj", "{90AFF4E8-A2AF-4606-9727-9766EAF34801}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewShore.Bussines", "NewShore.Bussines\NewShore.Bussines.csproj", "{90AFF4E8-A2AF-4606-9727-9766EAF34801}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewShore.DataAccess", "NewShore.DataAccess\NewShore.DataAccess.csproj", "{6BFF7504-B6C9-415A-A006-0DD9DD517D28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewShore.DataAccess", "NewShore.DataAccess\NewShore.DataAccess.csproj", "{6BFF7504-B6C9-415A-A006-0DD9DD517D28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewShoreAir.Dtos", "NewShoreAir.Dtos\NewShoreAir.Dtos.csproj", "{DFDEAFC9-42A7-4AEE-BA73-58438E2F2315}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewShoreAir.Domain", "NewShoreAir.Dtos\NewShoreAir.Domain.csproj", "{DFDEAFC9-42A7-4AEE-BA73-58438E2F2315}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
