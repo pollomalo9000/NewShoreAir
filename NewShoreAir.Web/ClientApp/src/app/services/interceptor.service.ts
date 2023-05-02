@@ -7,7 +7,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LoginService } from './login.service';
+
 import { LoaderService } from './loader.service';
 
 @Injectable({
@@ -16,7 +16,7 @@ import { LoaderService } from './loader.service';
 export class Interceptor implements HttpInterceptor {
   constructor(
     //private _global: GlobalService,
-    private _login: LoginService,private loadingService: LoaderService
+   private loadingService: LoaderService
     //private _fuseConfirmationService: FuseConfirmationService
   ) {}
   public countRequest: HttpRequest<any>[] = [];
@@ -41,14 +41,13 @@ export class Interceptor implements HttpInterceptor {
       this.loadingService.setLoading(true);
     }
     
-    if (this._login.getToken()) {
       req = req.clone({
         headers: req.headers.set(
-          'Authorization',
-          'Bearer ' + this._login.getToken()
+          'apikey',
+          '4sjxTf6vUq5Qjb0dbclKFJufgA42z4bg'
         ),
       });
-    }
+    
 
     if (!req.headers.has('Content-Type')) {
       req = req.clone({

@@ -79,7 +79,7 @@ export class HomeComponent {
         },
         (err) => {
    
-          this.message = err;
+          this.message = err.error.error;
 
           //this._openModalError();
         }

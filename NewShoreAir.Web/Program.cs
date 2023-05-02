@@ -1,4 +1,5 @@
 using NewShoreAir.Domain.Helpers;
+using NewShoreAir.Web.Excepciones;
 using NewShoreAir.Web.Extensions;
 using System.Configuration;
 
@@ -15,7 +16,8 @@ builder.Services.ConfigureCors();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddSwagger();
-
+// Add your logging handler
+builder.Logging.AddLog4Net();
 
 // Add configuration
 var configuration = builder.Configuration;
@@ -23,7 +25,7 @@ builder.Services.AddSingleton<IConfiguration>(configuration);
 HelperConfiguracion.Initialize(configuration);
 
 var app = builder.Build();
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -40,8 +42,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-// Add your logging handler
-//builder.Logging.AddLog4Net();
+
 
 app.MapControllerRoute(
     name: "default",

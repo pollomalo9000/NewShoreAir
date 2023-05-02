@@ -1,6 +1,10 @@
-﻿using NewShoreAir.Domain.Excepciones;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using NewShoreAir.Domain.Excepciones;
 using Newtonsoft.Json;
+using System;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace NewShoreAir.Web.Excepciones
 {
@@ -8,9 +12,12 @@ namespace NewShoreAir.Web.Excepciones
     {
         private readonly RequestDelegate _next;
 
-        public ErrorHandlingMiddleware(RequestDelegate next)
+        private static  ILogger<ErrorHandlingMiddleware> _logger;
+
+        public ErrorHandlingMiddleware(RequestDelegate next, ILogger<ErrorHandlingMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -25,8 +32,10 @@ namespace NewShoreAir.Web.Excepciones
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            _logger.LogError(exception, "Unhandled Exception");
+
             HttpStatusCode status;
             string message = String.Empty;
 
@@ -75,7 +84,7 @@ namespace NewShoreAir.Web.Excepciones
             var result = JsonConvert.SerializeObject(new { error = message });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)status;
-            return context.Response.WriteAsync(result);
+            await context.Response.WriteAsync(result);
         }
     }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { HttpHeadersEnum } from '../enums/http-headers.enum';
 
 
@@ -57,8 +57,21 @@ export class CoreApiService {
    * para que la aplicación siga su rumbo
    * @returns { Observable<any> }
    */
-  private _handleObsError(): Observable<any> {
-    return of(null);
+  private _handleObsError(err: any) {
+    console.error('An error occurred:', err);
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('Error:', err.error.message);
+      return throwError(err.error.message);
+    } else {
+      // The backend returned an unsuccessful response code.
+      console.error(
+        `Backend returned code ${err.status}, body was: ${JSON.stringify(
+          err.error
+        )}`
+      );
+      return throwError(err);
+    }
   }
   /**
    * Construye los HttpParams según la query indicada.
@@ -109,7 +122,7 @@ export class CoreApiService {
 
     return this._http
       .get<T[]>(url)
-      .pipe(catchError((err) => this._handleObsError()));
+      .pipe(catchError((err) => this._handleObsError(err)));
   }
 
 
@@ -123,7 +136,7 @@ export class CoreApiService {
 
     return this._http
       .get<T[]>(url)
-      .pipe(catchError((err) => this._handleObsError()));
+      .pipe(catchError((err) => this._handleObsError(err)));
   }
   /**
    * Indicando una entidad y los criterios de búsqueda, devuelve aquellos registros
@@ -137,7 +150,7 @@ export class CoreApiService {
     const params = this._buildParams(query);
     return this._http
       .get<T[]>(searchUrl, { params })
-      .pipe(catchError((err) => this._handleObsError()));
+      .pipe(catchError((err) => this._handleObsError(err)));
   }
 
   /**
@@ -147,15 +160,7 @@ export class CoreApiService {
    * @param query Criterios de búsqueda
    * @returns {Obsevable<T>}
    */
-  public findByQuery2<T>(type: string, query: any): Observable<T> {
-    const searchUrl = `${this.routes[type].searchURL}`;
-    const params = this._buildParams(query);
-    return this._http
-      .get<T[]>(searchUrl, { params })
-      .pipe(catchError((err) => this._handleObsError()));
-  }
-
-
+ 
 
  /**
    * Indicando una entidad y los criterios de búsqueda, devuelve aquellos registros
