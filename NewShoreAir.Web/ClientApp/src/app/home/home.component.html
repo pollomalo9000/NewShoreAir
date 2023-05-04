@@ -27,6 +27,13 @@
           <option value="true">Ida y Vuelta</option>
         </select>
       </div>
+      <div class="col-md-2 col-xs-6">
+        <select class="form-control" (change)="currencyChange($event)" >
+          <option value="USD" selected="selected">USD</option>
+          <option value="COP">COP</option>
+          <option value="EUR">EUR</option>
+        </select>
+      </div>
     </div>
     <div class="row">
       <div class="text-end col-12">
@@ -63,7 +70,7 @@
                 <td> {{journey.isReturn ? 'Ida y Vuelta' : 'Id' }}</td>
                 <td>{{journey.origin}}</td>
                 <td>{{journey.destination}}</td>
-                <td>{{journey.price}}</td>
+                <td>{{journey.price *currency }}</td>
           
                 <td colspan="4">
                  
@@ -85,7 +92,7 @@
                         <td>{{flight.origin}}</td>
                         <td>{{flight.destination}}</td>
                         <td>{{flight.transport.flightNumber}}</td>
-                        <td>{{flight.price}}</td>
+                        <td>{{flight.price*currency}}</td>
 
                       </tr>
 

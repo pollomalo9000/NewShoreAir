@@ -26,7 +26,8 @@ export class CoreApiService {
       HttpHeadersEnum.CONTENT_TYPE,
       HttpHeadersEnum.APPLICATION_JSON,
     );
-
+    this.headers.append( 'apikey',
+    '08OInHqSoeux2HPGs0bukF4j6nQIU7AX')
     
     this._initRoutes();
   }
@@ -39,8 +40,17 @@ export class CoreApiService {
         backendURL: `${this.apiURL}Flight/GetJourneys`,
         searchURL: `${this.apiURL}Flight/GetJourneys`,
         backendURL2: `${this.apiURL}Flight/GetJourneys`,
+      },
+      currency: {
+        backendURL: `${this.apilayerCurrency}`,
+        searchURL: `${this.apilayerCurrency}`,
+        backendURL2: `${this.apilayerCurrency}`,
       }
+
      };
+
+
+     
   }
 
   /**
@@ -50,6 +60,11 @@ export class CoreApiService {
   get apiURL(): string {
 
     return  `https://localhost:7070/Api/` ;
+  }
+
+  get apilayerCurrency(): string {
+
+    return  `https://api.apilayer.com/exchangerates_data` ;
   }
 
   /**
@@ -98,7 +113,9 @@ export class CoreApiService {
 
   public findById<T>(type: string, id: string): Observable<T> {
     const url = `${this.routes[type].backendURL}/${id}`;
-    return this._http.get<T>(url);
+    debugger;
+    var a = this._http.get<T>(url);
+    return a;
   }
   /**
    * Indicando una entidad y su id, devuelve el registro pertinente a la misma.
